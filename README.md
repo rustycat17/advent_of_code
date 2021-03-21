@@ -1,0 +1,1 @@
+Solutions for Advent of code written in Rust. For more information, see [here](https://adventofcode.com/).
