@@ -8,11 +8,11 @@ fn main() {
     let mut floor = 0;
     let mut first_basement = 0;
 
-    for (index, char) in input.chars().enumerate() {
-        match char {
+    for (index, symbol) in input.chars().enumerate() {
+        match symbol {
             '(' => floor += 1,
             ')' => floor -= 1,
-            _ => panic!("wrong symbol {}", char),
+            _ => panic!("wrong symbol {}", symbol),
         }
 
         if floor == -1 && first_basement == 0 {
