@@ -1,9 +1,13 @@
 use std::fs;
 
 fn main() {
-    // let input = "(())";
+    let filepath = "data/input.txt";
+    let input = fs::read_to_string(filepath);
 
-    let input = fs::read_to_string("data/input.txt").expect("unable to read file data/input.txt");
+    let input = match input {
+        Ok(input) => input,
+        Err(err) => panic!("{}: {}", err, filepath),
+    };
 
     let mut floor = 0;
     let mut first_basement = None;
