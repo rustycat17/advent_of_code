@@ -5,20 +5,24 @@ fn main() {
         Err(err) => panic!("file not found, error code {}", err),
     };
 
-    let mut total_area_sum = 0;
+    let mut total_area_paper = 0;
+    let mut total_ribbon_length = 0;
 
     for line in input.split('\n') {
-        let len_vec: Vec<i32> = line.split('x').map(|x| x.parse().unwrap()).collect();
+        let mut len_vec: Vec<i32> = line.split('x').map(|x| x.parse().unwrap()).collect();
 
-        let current_area_sum = calculate_area(len_vec);
+        let current_area_paper = calculate_area(&len_vec);
+        let current_ribbon_length = calculate_length(&mut len_vec);
 
-        total_area_sum += current_area_sum;
+        total_area_paper += current_area_paper;
+        total_ribbon_length += current_ribbon_length;
     }
 
-    println!("square feet of wrapping paper: {}", total_area_sum);
+    println!("square feet of wrapping paper: {}", total_area_paper);
+    println!("length of ribbon: {}", total_ribbon_length);
 }
 
-fn calculate_area(len_vec: Vec<i32>) -> i32 {
+fn calculate_area(len_vec: &[i32]) -> i32 {
     let area_vec = [
         len_vec[0] * len_vec[1],
         len_vec[0] * len_vec[2],
@@ -32,4 +36,16 @@ fn calculate_area(len_vec: Vec<i32>) -> i32 {
     };
 
     2 * (area_vec[0] + area_vec[1] + area_vec[2]) + min_area.unwrap()
+}
+
+fn calculate_length(len_vec: &mut Vec<i32>) -> i32 {
+    let ribbon_bow: i32 = len_vec.iter().product();
+
+    len_vec.sort_unstable();
+    len_vec.pop();
+
+    let ribbon_wrap = 2 * (len_vec[0] + len_vec[1]);
+
+    println!("{} {}", ribbon_wrap, ribbon_bow);
+    ribbon_wrap + ribbon_bow
 }
