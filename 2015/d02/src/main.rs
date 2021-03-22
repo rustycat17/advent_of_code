@@ -5,7 +5,7 @@ fn main() {
         Err(err) => panic!("file not found, error code {}", err),
     };
 
-    let mut total_sum = 0;
+    let mut total_area_sum = 0;
 
     for line in input.split("\n") {
         let len_vec:Vec<i32> = line
@@ -13,18 +13,23 @@ fn main() {
             .map(|x| x.parse().unwrap())
             .collect();
 
-        let area_vec = vec![len_vec[0] * len_vec[1], len_vec[0] * len_vec[2], len_vec[1] * len_vec[2]];
+        let current_area_sum = calculate_area(len_vec);
 
-        let minimum = area_vec.iter().min();
-        match minimum {
-            Some(value) => value,
-            None => panic!("vector is empty"),
-        };
-
-        let iter_sum = 2 * (area_vec[0] + area_vec[1] + area_vec[2]) + minimum.unwrap();
-
-        total_sum += iter_sum;
+        total_area_sum += current_area_sum;
     }
 
-    println!("square feet of wrapping paper: {}", total_sum);
+    println!("square feet of wrapping paper: {}", total_area_sum);
+}
+
+fn calculate_area(len_vec: Vec<i32>) -> i32 {
+    let area_vec = [len_vec[0] * len_vec[1], len_vec[0] * len_vec[2], len_vec[1] * len_vec[2]];
+
+    let min_area = area_vec.iter().min();
+    match min_area {
+        Some(value) => value,
+        None => panic!("vector is empty"),
+    };
+
+    2 * (area_vec[0] + area_vec[1] + area_vec[2]) + min_area.unwrap()
+
 }
