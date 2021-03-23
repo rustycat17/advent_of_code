@@ -26,31 +26,58 @@ fn main() {
         Err(err) => panic!("could not open file {}, error message {}", filename, err),
     };
 
-    let mut coord = Point {
+    let mut coord1 = Point {
         x: 0,
         y: 0,
     };
-    let mut unique_locations = vec![coord];
+    let mut coord2 = Point {
+        x: 0,
+        y: 0,
+    };
 
-    for symbol in input.chars() {
+    let mut unique_locations = vec![coord1];
+
+    for (index, symbol) in input.chars().enumerate() {
         // println!("{}", symbol);
-        if symbol == '>' {
-            coord = coord.calc_coordinates(Point {x: 1, y: 0});
-        } else if symbol == '<' {
-            coord = coord.calc_coordinates(Point {x: -1, y: 0});
-        } else if symbol == '^' {
-            coord = coord.calc_coordinates(Point {x: 0, y: 1});
-        } else if symbol == 'v' {
-            coord = coord.calc_coordinates(Point {x: 0, y: -1});
+        if (index + 1) % 2 != 0 {
+            if symbol == '>' {
+                coord1 = coord1.calc_coordinates(Point {x: 1, y: 0});
+            } else if symbol == '<' {
+                coord1 = coord1.calc_coordinates(Point {x: -1, y: 0});
+            } else if symbol == '^' {
+                coord1 = coord1.calc_coordinates(Point {x: 0, y: 1});
+            } else if symbol == 'v' {
+                coord1 = coord1.calc_coordinates(Point {x: 0, y: -1});
+            } else {
+                panic!("unknown symbol: {}", symbol);
+            }
+            if !unique_locations.contains(&coord1) {
+                unique_locations.push(coord1);
+            }
         } else {
-            panic!("unknown symbol: {}", symbol);
+            if symbol == '>' {
+                coord2 = coord2.calc_coordinates(Point {x: 1, y: 0});
+            } else if symbol == '<' {
+                coord2 = coord2.calc_coordinates(Point {x: -1, y: 0});
+            } else if symbol == '^' {
+                coord2 = coord2.calc_coordinates(Point {x: 0, y: 1});
+            } else if symbol == 'v' {
+                coord2 = coord2.calc_coordinates(Point {x: 0, y: -1});
+            } else {
+                panic!("unknown symbol: {}", symbol);
+            }
+            if !unique_locations.contains(&coord2) {
+                unique_locations.push(coord2);
+            }
         }
-        if !unique_locations.contains(&coord) {
-            unique_locations.push(coord);
-        }
+        println!("symbol: {:?}", symbol);
+        println!("index+1: {}", index + 1);
+        println!("point 1: {:?}", coord1);
+        println!("point 2: {:?}", coord2);
+
     }
 
-    println!("{:?}", coord);
+    // println!("{:?}", coord);
     println!("{:?}", unique_locations);
     println!("{}", unique_locations.len());
 }
