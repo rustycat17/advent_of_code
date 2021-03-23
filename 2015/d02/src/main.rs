@@ -32,7 +32,7 @@ fn calculate_area(len_vec: &[i32]) -> i32 {
     let min_area = area_vec.iter().min();
     match min_area {
         Some(value) => value,
-        None => panic!("vector is empty"),
+        None => unreachable!("vector is empty"),
     };
 
     2 * (area_vec[0] + area_vec[1] + area_vec[2]) + min_area.unwrap()
@@ -46,6 +46,5 @@ fn calculate_length(len_vec: &mut Vec<i32>) -> i32 {
 
     let ribbon_wrap = 2 * (len_vec[0] + len_vec[1]);
 
-    println!("{} {}", ribbon_wrap, ribbon_bow);
     ribbon_wrap + ribbon_bow
 }
