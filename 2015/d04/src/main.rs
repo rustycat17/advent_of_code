@@ -1,5 +1,5 @@
-use crypto::md5::Md5;
 use crypto::digest::Digest;
+use crypto::md5::Md5;
 
 fn main() {
     let secret_key = String::from("bgvyzdsv");
@@ -16,7 +16,5 @@ fn main() {
             println!("{}", teststr);
             break;
         }
-
     }
-
 }
