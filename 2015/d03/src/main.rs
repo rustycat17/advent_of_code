@@ -7,6 +7,10 @@ struct Point {
 }
 
 impl Point {
+    fn origin() -> Self {
+        Self { x: 0, y: 0 }
+    }
+
     fn calc_coordinates(self, second_point: Point) -> Self {
         Self {
             x: self.x + second_point.x,
@@ -24,8 +28,8 @@ fn main() {
         Err(err) => panic!("could not open file {}, error message {}", filename, err),
     };
 
-    let mut coord1 = Point { x: 0, y: 0 };
-    let mut coord2 = Point { x: 0, y: 0 };
+    let mut coord1 = Point::origin();
+    let mut coord2 = Point::origin();
 
     let mut unique_locations = vec![coord1];
 
