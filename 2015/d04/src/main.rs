@@ -6,14 +6,14 @@ fn main() {
 
     let mut counter = 1;
     loop {
-        let teststr = secret_key.clone() + &counter.to_string();
+        let test_str = secret_key.clone() + &counter.to_string();
         counter += 1;
 
         let mut hash = Md5::new();
-        hash.input_str(&teststr);
+        hash.input_str(&test_str);
 
         if hash.result_str().starts_with("000000") {
-            println!("{}", teststr);
+            println!("{}", test_str);
             break;
         }
     }
