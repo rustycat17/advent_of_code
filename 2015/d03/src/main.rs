@@ -20,7 +20,6 @@ impl Point {
 }
 
 fn main() {
-    // let input = "^v^v^v^v^v";
     let filename = "data/input.txt";
     let input = fs::read_to_string(filename);
     let input = match input {
@@ -34,7 +33,6 @@ fn main() {
     let mut unique_locations = vec![coord1];
 
     for (index, symbol) in input.chars().enumerate() {
-        // println!("{}", symbol);
         if (index + 1) % 2 != 0 {
             coord1 = parse_direction(coord1, symbol);
             if !unique_locations.contains(&coord1) {
